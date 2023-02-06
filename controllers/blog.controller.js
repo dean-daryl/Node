@@ -3,7 +3,7 @@
 import mongoose from 'mongoose';
 import cloudinary from 'cloudinary';
 import Blog from "../models/Blogs.js";
-import bodyParser from "body-parser";
+import passport from 'passport'
 
 
 export const getBlogs =  async(req,res)=>
@@ -12,14 +12,14 @@ const blogs=await Blog.find()
 res.send(blogs)
 
 }
-// export { getBlogs };
+
 
  export const postBlog = async (req, res,next) => {
  
     try {
       const blog = new Blog({
         title: req.body.title,
-        content: req.body.content
+        content: req.body.content,
       });
     //   const doesExist = await Blog.findOne({ title: valid.title });
     //   if (doesExist) {
@@ -34,10 +34,11 @@ res.send(blogs)
       await blog.save();
       res.send(blog);
       next();
-    } catch (error) {
-      console.log(error);
+    } 
+    catch (error) {
+      
       res.status(500);
-      res.send({ error: "Blog doesn't exist" });
+      res.json({ error: "Blog doesn't exist !" });
     }
   }
   // export default postBlog;
@@ -45,17 +46,20 @@ res.send(blogs)
 
   export const getBlog= async (req, res) => {
 
-    // retrieving blog from Mongo DB using Mongoose... the findOne method of the Blog model retrieves the blog 
     try{ 
 
     const blog = await Blog.findOne({ _id: req.params.id })
+    if(!blog){
+      res.status(404);
+      res.send({error:"Blog doesn't exist!"})
+    }
     res.send(blog);
+    
   
     }
 
     catch{
-        res.status(404);
-        res.send({error:"Blog doesn't exist!"})
+        res.statu(500).json({error:"Internal Server Error"})
     }
     }
 
@@ -96,7 +100,7 @@ export const updateBlog =  async (req,res)=>{
   export const deleteBlog= async (req, res) =>{
     try{
         await Blog.deleteOne({ _id:req.params.id})
-        res.status(204).send()
+        res.status(204).send({message:"Blog Deleted"})
     }
     catch{
         res.status(404)
