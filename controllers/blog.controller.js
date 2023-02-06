@@ -3,7 +3,7 @@
 import mongoose from 'mongoose';
 import cloudinary from 'cloudinary';
 import Blog from "../models/Blogs.js";
-import passport from 'passport'
+
 
 
 export const getBlogs =  async(req,res)=>
@@ -59,7 +59,7 @@ res.send(blogs)
     }
 
     catch{
-        res.statu(500).json({error:"Internal Server Error"})
+        res.status(500).json({error:"Internal Server Error"})
     }
     }
 

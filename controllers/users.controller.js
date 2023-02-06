@@ -1,9 +1,8 @@
 import User from "../models/Users.js";
 import bcrypt from 'bcrypt';
-import passport from "passport";
-const   LocalStrategy = passport.Strategy
+// import passport from "passport";
+// const   LocalStrategy = passport.Strategy
 import jwt from 'jsonwebtoken'
-import Users from "../models/Users.js";
 // import Users from "../models/Users.js";
 
 
@@ -38,7 +37,6 @@ res.status(400).json({message:error.message})
 }
 
 
-
 export const signIn= async(req,res)=>{
    try{ 
     let email=req.body.email;
@@ -47,14 +45,25 @@ export const signIn= async(req,res)=>{
  if(!user){
      res.send(404).json({message:"Email isn't valid"})
  }
+
  if(!bcrypt.compareSync(password,user.password)){
      return res.status(401).json({error:"Incorrect Credentials"})
  }
-  user.set("status",true)
- let result=await user.save()
-return res.json(result)
-   
-   }
+ else{
+const payload={
+    id:user.id,
+    username:user.name,
+    isAdmin:user.is,
+    email:user.email
+};
+
+const options={
+    expiresIn:'1d'
+};
+const token=jwt.sign(payload,`${process.env.JWT_SECRET}`,options)
+res.status(200).json({ status: 200, success: true, token: token });
+ }  
+}
    catch (error) {
         console.log("message",error.message)
         return res.status(500).json({message:"Server Error "})

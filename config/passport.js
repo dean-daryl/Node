@@ -1,7 +1,6 @@
-import Users from "../models/Users.js";
-import passport from "passport";
-import passportLocal from 'passport-local'
-
+import User from "../models/Users.js";
+import passportLocal from 'passport-local';
+import bcrypt from 'bcrypt'
 const localStrategy=passportLocal.Strategy
 
 
@@ -15,7 +14,7 @@ export const signIn = (passport) => {
           passwordField: "password",
         },
         async (email, password, done) => {
-          const user = await Users.findOne({ email: email });
+          const user = await User.findOne({ email: email });
           if (!user) return done(null, false);
   
           let match = await bcrypt.compare(password, user.password);
