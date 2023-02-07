@@ -2,9 +2,11 @@ import multer, { diskStorage } from "multer";
 import { Router } from 'express';
 const blogrouter=Router();
 import { v2 as cloudinary } from "cloudinary";
-import { getBlogs, postBlog, getBlog, updateBlog, deleteBlog } from '../controllers/blog.controller.js';
+import { getBlogs, postBlog, getBlog, updateBlog, deleteBlog, addComment, getComments, like, likecounter } from '../controllers/blog.controller.js';
 import isValid from "../middleware/isBlogValid.js";
 import BlogSchema from "../validations/blog.js";
+import { isAdmin, LoggedIn } from "../middleware/authentication.js";
+import commentSchema from "../validations/comments.js";
 
 
 const storage=diskStorage({});
@@ -26,10 +28,12 @@ const uploads= multer({storage,fileFilter})
     })
     
    blogrouter.get("/blogs", getBlogs)
-   blogrouter.post("/blogs",isValid(BlogSchema), uploads.single('image'), postBlog); 
+   blogrouter.post("/blogs",LoggedIn,isAdmin, uploads.single('image'),isValid(BlogSchema), postBlog); 
    blogrouter.get("/blogs/:id",getBlog);
-   blogrouter.patch("/blogs/:id",uploads.single('image'),updateBlog)
-   blogrouter.delete("/blogs/:id",deleteBlog);
-
-
+   blogrouter.patch("/blogs/:id",LoggedIn,isAdmin,uploads.single('image'),updateBlog)
+   blogrouter.delete("/blogs/:id",LoggedIn,isAdmin,deleteBlog);
+   blogrouter.post("/blogs/:id/comments",LoggedIn,isValid(commentSchema),addComment)
+   blogrouter.get("/blogs/:id/comments",getComments)
+   blogrouter.post("/blogs/:id/likes",LoggedIn,like)
+   blogrouter.get("/blogs/:id/likes",LoggedIn,likecounter)
     export default  blogrouter;

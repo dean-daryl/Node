@@ -7,18 +7,24 @@ export const LoggedIn = async(req,res,next)=>{
 try{
 if (req.headers.authorization) {
 const token = req.headers.authorization.split(' ')[1]; 
-const decodedData = jwt.verify(token, `${process.env.JWT_SECRET}`);
-const user = await User.findOne({ email: decodedData.email });console.log(decodedData)
+const decoded = jwt.verify(token, `${process.env.JWT_SECRET}`);
+const user = await User.findOne({ email: decoded.email });
+
 
 if(!user){
-    res.status(401).json({message:"User doesn't Exist"})
+    res.status(404).json({message:"User doesn't Exist"})
 }
 else{
     req.user = user;
     next();
 }
 
-}}
+}
+else{
+  res.status(401).json({message:"Not Logged In"})
+}
+
+}
 catch(error){
     console.log(error)
     res.status(500).json({message:"error"})
