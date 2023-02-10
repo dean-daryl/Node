@@ -173,7 +173,7 @@ export const getComments= async (req, res) => {
         return res.status(404).send({
           statusCode: 404,
           success: false,
-          data: [{ message: 'Blog not found!' }],
+           message: "Blog doesn't exist"
         });}
       else{
           res.status(201).json({
@@ -186,7 +186,10 @@ export const getComments= async (req, res) => {
       }
     
     catch(error){
-
+      res.status(401).send({
+      
+        message:`Blog doesn't exist`
+      })
     }
 
   }

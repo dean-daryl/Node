@@ -1,6 +1,8 @@
 import request from 'supertest';
+import mongoose from 'mongoose';
 import  jwt  from 'jsonwebtoken';
 import bcrypt from 'bcrypt'
+import passport from 'passport';
 import User from '../models/Users.js';
 import { app } from '../index.js';
 import { getBlogs,getBlog,postBlog, deleteBlog,getComments,addComment,like,likecounter} from '../controllers/blog.controller.js';
@@ -12,7 +14,9 @@ import { isAdmin,LoggedIn } from '../middleware/authentication.js';
 import { getQueries,postQuery } from '../controllers/queries.controller.js';
 import { signup } from '../controllers/users.controller.js';
 
-
+let token=" "
+let blog_id = "";
+let query_id = "";
 
 jest.mock('../models/Blogs.js', () => ({
   find: jest.fn().mockResolvedValue([{ id: 1, title: 'Blog 1' }, { id: 2, title: 'Blog 2' }]),
@@ -193,6 +197,7 @@ describe('isUserValid', () => {
         send: jest.fn()
       }))
     };
+
     const next = jest.fn();
 
     isUserValid(schema)(req, res, next);
@@ -521,45 +526,7 @@ describe('LoggedIn', () => {
     expect(res.status).not.toHaveBeenCalled();
   });
 
-  // it('returns a 404 response for non-existing users', async () => {
-  //   const token = jwt.sign({ email: 'test@example.com' }, `${process.env.JWT_SECRET}`);
-  //   const req = {
-  //     headers: { authorization: `Bearer ${token}` },
-  //   };
-  //   const res = {
-  //     status: jest.fn(() => ({
-  //       json: jest.fn(() => {})
-  //     }))
-  //   };
-  //   const next = jest.fn();
-  //   User.findOne = jest.fn().mockResolvedValue(null);
-
-  //   await LoggedIn(req, res, next);
-
-  //   expect(User.findOne).toHaveBeenCalledWith({ email: 'test@example.com' });
-  //   expect(next).not.toHaveBeenCalled();
-  //   expect(res.status).toHaveBeenCalledWith(404);
-  //   expect(res.json).toHaveBeenCalledWith({ message: "User doesn't Exist" });
-
-  // });
-
-  // it('returns a 401 response for missing tokens', async () => {
-  //   const req = { headers: {} };
-  //   const res = {
-  //     status: jest.fn(() => ({
-  //       json: jest.fn(() => {})
-  //     }))
-  //   };
-  //   const next = jest.fn();
-  //   User.findOne = jest.fn().mockResolvedValue(null);
-
-  //   await LoggedIn(req, res, next);
-
-  //   expect(User.findOne).not.toHaveBeenCalled();
-  //   expect(next).not.toHaveBeenCalled();
-  //   expect(res.status).toHaveBeenCalledWith(401);
-  //   expect(res.status().json).toHaveBeenCalledWith({ message: "Not Logged In" });
-  // });
+  
 
   it('returns a 500 response for errors thrown', async () => {
     const error = new Error('Test error');
@@ -571,55 +538,28 @@ describe('LoggedIn', () => {
 
 
 
-// describe('signup', () => {
-//   afterEach(async () => {
-//     await User.deleteMany({});
-//   });
 
-//   it('Should create a new user', async () => {
-//     const res = await request(app)
-//       .post('/signup')
-//       .send({
-//         name: 'John Doe',
-//         email: 'johndoe@example.com',
-//         password: 'password',
-//       });
 
-//     expect(res.statusCode).toEqual(404);
-//     const user = await User.findOne({ email: 'johndoe@example.com' });
-//     expect(user).toBeDefined();
-//     // expect(user.name).toEqual('John Doe');
-//     expect(await bcrypt.compare('password', user.password)).toBeTruthy();
-//   });
+describe('likecounter', () => {
+  it("return a 401 status if '_id' is invalid", async () => {
+    const res = await request(app).get('/api/blogs/0001/likes');
+    expect(res.status).toEqual(401);
+    const message = res.body.message;
+    expect(message).toEqual("Blog doesn't exist");
+  });
+  it('should return "Blog not found!" if blog is not found', async () => {
+    const req = { params: { id: 'invalid_id' } };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn(),
+    };
   
-//   it('Should return 409 status code if the user already exists', async () => {
-//     await User.create({
-//       name: 'John Doe',
-//       email: 'johndoe@example.com',
-//       password: 'password',
-//     });
-
-//     const res = await request(app)
-//       .post('/signup')
-//       .send({
-//         name: 'John Doe',
-//         email: 'johndoe@example.com',
-//         password: 'password',
-//       });
-
-//     expect(res.statusCode).toEqual(404);
-//     expect(res.body).toEqual({ message: 'The Username is taken' });
-//   });
-
-//  })
-
-
-
-
-
-
-
-
-
-
-
+    await likecounter(req, res);
+  
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.send).toHaveBeenCalledWith({
+      message: "Blog doesn't exist"
+    });
+  });
+  
+})

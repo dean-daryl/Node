@@ -29,5 +29,5 @@ const uploads= multer({storage,fileFilter})
    blogrouter.post("/blogs/:id/comments",LoggedIn,isValid(commentSchema),addComment)
    blogrouter.get("/blogs/:id/comments",LoggedIn,getComments)
    blogrouter.post("/blogs/:id/likes",LoggedIn,like)
-   blogrouter.get("/blogs/:id/likes",LoggedIn,likecounter)
+   blogrouter.get("/blogs/:id/likes",likecounter)
     export default  blogrouter;
