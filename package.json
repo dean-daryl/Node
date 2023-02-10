@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "jest --coverage --verbose",
+    "test": "jest --coverage --verbose  --detectOpenHandles " ,
     "start": "nodemon index.js"
   },
   "jest": {

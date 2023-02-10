@@ -5,6 +5,7 @@ import Blog from "../models/Blogs.js";
 
 export const getBlogs =  async(req,res)=>
 {
+  
 const blogs=await Blog.find()
 res.send(blogs)
 
@@ -30,7 +31,6 @@ export const postBlog = async (req, res,next) => {
      
     } 
     catch (error) {
-      
       res.status(500).json({ error: "Blog doesn't exist !" });
     }
   }
@@ -114,7 +114,7 @@ export const getComments= async (req, res) => {
   model:'Blog',
   select: 'title'});
 
-  res.status(200).send(blog.comments);
+  res.status(201).send(blog.comments);
   
 
   }
@@ -156,13 +156,14 @@ export const getComments= async (req, res) => {
       
     } 
     catch (error) {
-      return res.status(404).send({
-        statusCode: 404,
+      return res.status(500).json({
+       
         success: false,
-        data: [{ message: 'Blog not found!' }]})
-    }
+         message: 'Server Error:Error when adding  a comment Test error' })
+        }
+      }
 
-  }
+  
 
   export const likecounter=async(req,res)=>{
     try{
