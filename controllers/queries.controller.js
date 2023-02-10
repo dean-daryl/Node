@@ -19,3 +19,5 @@ res.send(query)
  res.send(queries)
 
  }
+
+ 

@@ -13,7 +13,7 @@ try{
 
     const alreadyExits= await User.findOne({name:name})
     if(alreadyExits){
-        return res.status(409).json({message:"The Username is taken"})    
+        return res.status(404).send({message:"The Username is taken"})    
     }
     const user = new User({
         name:req.body.name,
@@ -34,40 +34,38 @@ res.status(400).json({message:error.message})
 
 }
 
-
 export const signIn= async(req,res)=>{
-   try{ 
-    let email=req.body.email;
-    let password=req.body.password;
-    let user= await User.findOne({email});
- if(!user){
-     res.send(404).json({message:"Email isn't valid"})
+    try{ 
+     let email=req.body.email;
+     let password=req.body.password;
+     let user= await User.findOne({email});
+  if(!user){
+      res.send(404).json({message:"Email isn't valid"})
+  }
+ 
+  if(!bcrypt.compareSync(password,user.password)){
+      return res.status(401).json({error:"Incorrect Credentials"})
+  }
+  else{
+ const payload={
+     id:user.id,
+     username:user.name,
+     isAdmin:user.is,
+     email:user.email
+ };
+ 
+ const options={
+     expiresIn:'1d'
+ };
+ const token=jwt.sign(payload,`${process.env.JWT_SECRET}`,options)
+ res.status(200).json({ status: 200, success: true, token: token });
+  }  
  }
-
- if(!bcrypt.compareSync(password,user.password)){
-     return res.status(401).json({error:"Incorrect Credentials"})
- }
- else{
-const payload={
-    id:user.id,
-    username:user.name,
-    isAdmin:user.is,
-    email:user.email
-};
-
-const options={
-    expiresIn:'1d'
-};
-const token=jwt.sign(payload,`${process.env.JWT_SECRET}`,options)
-res.status(200).json({ status: 200, success: true, token: token });
- }  
-}
-   catch (error) {
-        console.log("message",error.message)
-        return res.status(500).json({message:"Server Error "})
-     }
-}
-
+    catch (error) {
+         console.log("message",error.message)
+         return res.status(500).json({message:"Server Error "})
+      }
+    } 
 
 
 

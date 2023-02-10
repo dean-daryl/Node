@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1676051861398" clover="3.2.0">
-  <project timestamp="1676051861398" name="All files">
-    <metrics statements="199" coveredstatements="98" conditionals="38" coveredconditionals="12" methods="28" coveredmethods="12" elements="265" coveredelements="122" complexity="0" loc="199" ncloc="199" packages="7" files="18" classes="18"/>
+<coverage generated="1676059417243" clover="3.2.0">
+  <project timestamp="1676059417243" name="All files">
+    <metrics statements="197" coveredstatements="111" conditionals="38" coveredconditionals="13" methods="28" coveredmethods="15" elements="263" coveredelements="139" complexity="0" loc="197" ncloc="197" packages="7" files="18" classes="18"/>
     <package name="Node">
-      <metrics statements="15" coveredstatements="3" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="15" coveredstatements="15" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
       <file name="index.js" path="C:\Users\deand\Documents\GitHub\Node\index.js">
-        <metrics statements="14" coveredstatements="2" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <metrics statements="14" coveredstatements="14" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
-        <line num="20" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
+        <line num="20" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
       </file>
       <file name="uploads.js" path="C:\Users\deand\Documents\GitHub\Node\uploads.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -27,12 +27,12 @@
       </file>
     </package>
     <package name="Node.config">
-      <metrics statements="8" coveredstatements="2" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="8" coveredstatements="3" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="1"/>
       <file name="passport.js" path="C:\Users\deand\Documents\GitHub\Node\config\passport.js">
-        <metrics statements="8" coveredstatements="2" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <metrics statements="8" coveredstatements="3" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="4" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="20" count="0" type="stmt"/>
@@ -143,31 +143,31 @@
         <line num="25" count="0" type="stmt"/>
         <line num="30" count="0" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
         <line num="41" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="43" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="47" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
+        <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="46" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
         <line num="61" count="0" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
         <line num="66" count="0" type="stmt"/>
-        <line num="67" count="0" type="stmt"/>
-        <line num="74" count="1" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
-        <line num="77" count="0" type="stmt"/>
-        <line num="81" count="1" type="stmt"/>
-        <line num="82" count="0" type="stmt"/>
-        <line num="83" count="0" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
       </file>
     </package>
     <package name="Node.middleware">
-      <metrics statements="32" coveredstatements="22" conditionals="10" coveredconditionals="6" methods="6" coveredmethods="6"/>
+      <metrics statements="30" coveredstatements="22" conditionals="10" coveredconditionals="6" methods="6" coveredmethods="6"/>
       <file name="authentication.js" path="C:\Users\deand\Documents\GitHub\Node\middleware\authentication.js">
         <metrics statements="20" coveredstatements="14" conditionals="6" coveredconditionals="4" methods="2" coveredmethods="2"/>
         <line num="6" count="1" type="stmt"/>
@@ -192,22 +192,20 @@
         <line num="49" count="0" type="stmt"/>
       </file>
       <file name="isBlogValid.js" path="C:\Users\deand\Documents\GitHub\Node\middleware\isBlogValid.js">
-        <metrics statements="6" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <metrics statements="5" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
         <line num="1" count="4" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="4" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
       </file>
       <file name="isUserValid.js" path="C:\Users\deand\Documents\GitHub\Node\middleware\isUserValid.js">
-        <metrics statements="6" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <metrics statements="5" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
         <line num="2" count="2" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
       </file>
     </package>
     <package name="Node.models">

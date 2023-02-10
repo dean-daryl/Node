@@ -1,5 +1,6 @@
 import request from 'supertest';
 import  jwt  from 'jsonwebtoken';
+import bcrypt from 'bcrypt'
 import User from '../models/Users.js';
 import { app } from '../index.js';
 import { getBlogs,getBlog,postBlog, deleteBlog,getComments,addComment,like,likecounter} from '../controllers/blog.controller.js';
@@ -8,20 +9,11 @@ import { fileFilter } from '../routes/blogs.routes.js';
 import isValid from '../middleware/isBlogValid.js';
 import isUserValid from '../middleware/isUserValid.js';
 import { isAdmin,LoggedIn } from '../middleware/authentication.js';
+import { getQueries,postQuery } from '../controllers/queries.controller.js';
+import { signup } from '../controllers/users.controller.js';
 
-// let connection;
 
-// beforeAll(async () => {
 
-//   connection = await mongodb.connect(
-//     "mongodb://localhost:27017/acmedb",
-//     { useNewUrlParser: true, useUnifiedTopology: true }
-//   );
-// });
-
-// afterAll(async () => {
-//   await connection.close();
-// });
 jest.mock('../models/Blogs.js', () => ({
   find: jest.fn().mockResolvedValue([{ id: 1, title: 'Blog 1' }, { id: 2, title: 'Blog 2' }]),
   findOne: jest.fn(),
@@ -575,76 +567,78 @@ describe('LoggedIn', () => {
   })
 })
 
+import Query from '../models/queries.js';
+describe('postQuery', () => {
+  it('should create a new query in the database', async () => {
+    const res = await request(app)
+      .post('/api/query')
+      .send({
+        name: 'John Doe',
+        message: 'This is a test query'
+      });
+
+    expect(res.statusCode).toEqual(404);
+    expect(res.name).toHaveProperty('name', 'John Doe');
+    expect(res.body).toHaveProperty('message', 'This is a test query');
+
+    const query = await Query.findOne({ name: 'John Doe' });
+    expect(query).toBeDefined();
+    expect(query.name).toEqual('John Doe');
+    expect(query.message).toEqual('This is a test query');
+  });
+});
 
 
 
+// describe('signup', () => {
+//   afterEach(async () => {
+//     await User.deleteMany({});
+//   });
 
+//   it('Should create a new user', async () => {
+//     const res = await request(app)
+//       .post('/signup')
+//       .send({
+//         name: 'John Doe',
+//         email: 'johndoe@example.com',
+//         password: 'password',
+//       });
 
-
-
-
-
-
-// describe('like', () => {
-//   let req;
-//   let res;
-//   let blog;
-  
-//   beforeEach(() => {
-//   req = {
-//   params: { id: '123' },
-//   user: 'test user',
-//   };
-//   res = {
-//   status: jest.fn().mockReturnThis(),
-//   send: jest.fn().mockReturnThis(),
-//   json: jest.fn().mockReturnThis(),
-//   };
-//   blog = {
-//   likes: [],
-//   save: jest.fn(),
-//   };
-//   Blog.findOne.mockResolvedValue(blog);
+//     expect(res.statusCode).toEqual(404);
+//     const user = await User.findOne({ email: 'johndoe@example.com' });
+//     expect(user).toBeDefined();
+//     // expect(user.name).toEqual('John Doe');
+//     expect(await bcrypt.compare('password', user.password)).toBeTruthy();
 //   });
   
-//   it('should find the blog by its id', async () => {
-//   await like(req, res);
-//   expect(Blog.findOne).toHaveBeenCalledWith({ _id: req.params.id });
+//   it('Should return 409 status code if the user already exists', async () => {
+//     await User.create({
+//       name: 'John Doe',
+//       email: 'johndoe@example.com',
+//       password: 'password',
+//     });
+
+//     const res = await request(app)
+//       .post('/signup')
+//       .send({
+//         name: 'John Doe',
+//         email: 'johndoe@example.com',
+//         password: 'password',
+//       });
+
+//     expect(res.statusCode).toEqual(404);
+//     expect(res.body).toEqual({ message: 'The Username is taken' });
 //   });
-  
-//   it('should return 404 if the blog does not exist', async () => {
-//   Blog.findOne.mockResolvedValue(null);
-//   await like(req, res);
-//   expect(res.status).toHaveBeenCalledWith(404);
-//   expect(res.json).toHaveBeenCalledWith({
-//   message: "Blog doesn't exist!",
-//   });
-//   });
-  
-//   it('should save the blog', async () => {
-//   await like(req, res);
-//   expect(blog.save).toHaveBeenCalled();
-//   });
-  
-//   it('should return 201 and the success message on success', async () => {
-//   await like(req, res);
-//   expect(res.status).toHaveBeenCalledWith(201);
-//   expect(res.json).toHaveBeenCalledWith({
-//     statusCode: 201,
-//     success: true,
-//     message: 'Like Added'
-//   });
-//   });
-  
-//   it('should return 500 and the error message on error', async () => {
-//   const error = new Error('Test error');
-//   Blog.findOne.mockRejectedValue(error);
-//   await like(req, res);
-//   expect(res.status).toHaveBeenCalledWith(500);
-//   expect(res.json).toHaveBeenCalledWith({
-//     statusCode: 500,
-//   success: false,
-//   message: 'Blog not found!'
-//   });
-//   });
-//   });
+
+//  })
+
+
+
+
+
+
+
+
+
+
+
