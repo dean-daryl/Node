@@ -1,14 +1,13 @@
 import multer, { diskStorage } from "multer";
 import { Router } from 'express';
-const blogrouter=Router();
-import { v2 as cloudinary } from "cloudinary";
+import cloudinary from "cloudinary";
 import { getBlogs, postBlog, getBlog, updateBlog, deleteBlog, addComment, getComments, like, likecounter } from '../controllers/blog.controller.js';
 import isValid from "../middleware/isBlogValid.js";
 import BlogSchema from "../validations/blog.js";
 import { isAdmin, LoggedIn } from "../middleware/authentication.js";
 import commentSchema from "../validations/comments.js";
 
-
+const blogrouter=Router();
 const storage=diskStorage({});
 const fileFilter=(req,file,cb)=>{
 if (file.mimetype.startsWith('image')) {
@@ -20,12 +19,7 @@ if (file.mimetype.startsWith('image')) {
 
 const uploads= multer({storage,fileFilter})
    
-    cloudinary.config({
-        cloud_name:'degfjcic5',
-        api_key:'885817653263579',
-        api_secret:'IGH_YJIwDxv_R4hk9KajoMoiI5I'
-    
-    })
+   
     
    blogrouter.get("/blogs", getBlogs)
    blogrouter.post("/blogs",LoggedIn,isAdmin, uploads.single('image'),isValid(BlogSchema), postBlog); 

@@ -1,7 +1,4 @@
-// import { getBlogs, blogBlog, getBlog, updateBlog, deleteBlog } from '../controllers/blog.controller';
-// const Joi = require('@hapi/joi');
-import mongoose from 'mongoose';
-import cloudinary from 'cloudinary';
+import cloudinary from "../uploads.js";
 import Blog from "../models/Blogs.js";
 
 
@@ -14,17 +11,14 @@ res.send(blogs)
 }
 
 
- export const postBlog = async (req, res,next) => {
+
+export const postBlog = async (req, res,next) => {
  
     try {
       const blog = new Blog({
         title: req.body.title,
         content: req.body.content,
       });
-    //   const doesExist = await Blog.findOne({ title: valid.title });
-    //   if (doesExist) {
-    //     throw createError.Conflict(`${valid.title} is already been used`);
-    //   }
       
       const result = await cloudinary.uploader.upload(req.file.path, {
         folder: 'portfolio/blogImages',
@@ -37,14 +31,13 @@ res.send(blogs)
     } 
     catch (error) {
       
-      res.status(500);
-      res.json({ error: "Blog doesn't exist !" });
+      res.status(500).json({ error: "Blog doesn't exist !" });
     }
   }
   // export default blogBlog;
 
 
-  export const getBlog= async (req, res) => {
+export const getBlog= async (req, res) => {
 
     try{ 
 
@@ -59,7 +52,7 @@ res.send(blogs)
     }
 
     catch{
-        res.status(500).json({error:"Internal Server Error"})
+        res.status(500).send({error:"Internal Server Error"})
     }
     }
 
@@ -84,20 +77,20 @@ export const updateBlog =  async (req,res)=>{
       }
 
       await blog.save()
-      console.log(blog)
+      
       res.send(blog)
     }
 
      catch (err) 
      {
-      console.log(err)
+      
       res.status(404);
       res.send({error:"Blog doesn't exist"})
     }
   }
-  // export default updateBlog;
 
-  export const deleteBlog= async (req, res) =>{
+
+export const deleteBlog = async (req, res) =>{
     try{
         await Blog.deleteOne({ _id:req.params.id})
         res.status(204).send({message:"Blog Deleted"})
@@ -108,37 +101,7 @@ export const updateBlog =  async (req,res)=>{
     }
 
 }
-
-export const addComment =async (req,res)=>{
-  try {
-const blog= await Blog.findOne({ _id: req.params.id })
-  console.log("This is the blog",blog)
-if(!blog){
-  res.status(404);
-  res.send({error:"Blog doesn't exist!"})
-}
-else{
-  blog.comments=[...blog.comments, {comment:req.body.comment,user:req.user, blog:blog},];
-  blog.save();
-  res.status(201).json({
-    success:true,
-    message:`Comment Added`
-  })
-
-}
-
-
-
-  } catch (error) {
-    res.status(500).json({
-      success:false,
-      message:`Server Error:Error when adding  a comment ${error.message}`
-    })
-    
-  }
-
-
-}
+ 
 
 export const getComments= async (req, res) => {
 
@@ -237,4 +200,31 @@ export const getComments= async (req, res) => {
 
   }
 
-// export default deleteBlog;
+  
+  export const addComment =async (req,res)=>{
+    try {
+  const blog= await Blog.findOne({ _id: req.params.id })
+    
+  if(!blog){
+    res.status(404);
+    res.send({error:"Blog doesn't exist!"})
+  }
+  else{
+    blog.comments=[...blog.comments, {comment:req.body.comment,user:req.user, blog:blog},];
+    blog.save();
+    res.status(201).json({
+      success:true,
+      message:`Comment Added`
+    })
+  
+  }
+    }
+  
+  catch (error) {
+      res.status(500).json({
+        success:false,
+        message:`Server Error:Error when adding  a comment ${error.message}`
+      })
+      
+    }}
+    

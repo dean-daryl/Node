@@ -16,4 +16,3 @@ const schema = mongoose.Schema({
 
 export default mongoose.model("Blog", schema);
 
-
