@@ -34,8 +34,8 @@ export const app=express()
 			app.use("/api", blogrouter)   
 			app.use("/api", queryrouter)
 			app.use("/api", userrouter)
-			// app.listen(5000, () => {
-			//   console.log("-->All stations, be advised the server is up and running!");
-			// });
+			app.listen(5000, () => {
+			  console.log("-->All stations, be advised the server is up and running!");
+			});
 		  }
 		});

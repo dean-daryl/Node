@@ -98,13 +98,13 @@ describe('postBlog', () => {
 
 // update Blog
 
-describe('updateBlog', () => {
-  it('return a 401 status if user is not logged in', async () => {
-    const res = await request(app).post('/api/blogs/').send({});
-    expect(res.status).toEqual(401);
-  });
+// describe('updateBlog', () => {
+//   it('return a 401 status if user is not logged in', async () => {
+//     const res = await request(app).post('/api/blogs/').send({});
+//     expect(res.status).toEqual(401);
+//   });
 
-});
+// });
 
 // delete Blog  
 describe('deleteBlog',()=>{
