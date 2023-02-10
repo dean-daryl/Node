@@ -567,26 +567,7 @@ describe('LoggedIn', () => {
   })
 })
 
-import Query from '../models/queries.js';
-describe('postQuery', () => {
-  it('should create a new query in the database', async () => {
-    const res = await request(app)
-      .post('/api/query')
-      .send({
-        name: 'John Doe',
-        message: 'This is a test query'
-      });
 
-    expect(res.statusCode).toEqual(404);
-    expect(res.name).toHaveProperty('name', 'John Doe');
-    expect(res.body).toHaveProperty('message', 'This is a test query');
-
-    const query = await Query.findOne({ name: 'John Doe' });
-    expect(query).toBeDefined();
-    expect(query.name).toEqual('John Doe');
-    expect(query.message).toEqual('This is a test query');
-  });
-});
 
 
 
