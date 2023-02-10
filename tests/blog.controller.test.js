@@ -16,6 +16,7 @@ jest.mock('../models/Blogs.js', () => ({
   
 }));
 
+
 // Get All Blogs Test
 
 describe('getBlogs', () => {
@@ -240,25 +241,24 @@ describe('getBlog', () => {
 // Get Comments
 
 
-// describe('getComments', () => {
-//   it('should return the comments for a specific blog', async () => {
-//     const res = await request(app).get('/blogs/:id/comments');
-//     expect(res.statusCode).toBe(200);
-//     expect(Array.isArray(res.body)).toBe(true);
-//   });
+describe('getComments', () => {
+  it('should return the comments for a specific blog', async () => {
+    const res = await request(app).get('/api/blogs/1/comments');
+    console.log(res)
+    expect(res.statusCode).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+  });
 
-//   it('should return 404 error if blog does not exist', async () => {
-//     const res = await request(app).get('/blogs/nonexistent/comments');
-//     expect(res.statusCode).toBe(404);
-//     expect(res.body).toHaveProperty('error', "Blog doesn't exist!");
-//   });
+  it('should return 404 error if blog does not exist', async () => {
+    const res = await request(app).get('/api/blogs/10114/comments');
+    expect(res.statusCode).toBe(404);
+    const message= res.body.message
 
-//   it('should return 500 error if there is a server error', async () => {
-//     const res = await request(app).get('/blogs/server-error/comments');
-//     expect(res.statusCode).toBe(500);
-//     expect(res.body).toHaveProperty('error', 'Internal Server Error');
-//   });
-// });
+    expect(message).toEqual("Blog doesn't exist!");
+  });
+
+  
+});
 
 
 // getcomments
@@ -279,7 +279,13 @@ describe('getBlog', () => {
 //   });
 // });
 
+
+
 // add comments
+
+
+
+
 
 describe('addComment', () => {
   let req;
@@ -350,3 +356,132 @@ describe('addComment', () => {
   })
 })
 
+
+
+// adding like 
+
+
+describe('like', () => {
+  let req;
+  let res;
+  let blog;
+
+  beforeEach(() => {
+    req = {
+      params: { id: '123' },
+      user: 'test user',
+    };
+    res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn().mockReturnThis(),
+      json: jest.fn().mockReturnThis(),
+    };
+    blog = {
+      likes: [],
+      save: jest.fn(),
+    };
+    Blog.findOne.mockResolvedValue(blog);
+  });
+
+  it('should find the blog by its id', async () => {
+    await like(req, res);
+    expect(Blog.findOne).toHaveBeenCalledWith({ _id: req.params.id });
+  });
+
+  it('should return 404 if the blog does not exist', async () => {
+    Blog.findOne.mockResolvedValue(null);
+    await like(req, res);
+    expect(res.status).toEqual(404);
+    expect(Blog.body.message).toEqual("Blog doesn't exist!");
+  });
+
+  it('should save the blog', async () => {
+    await like(req, res);
+    expect(blog.save).toHaveBeenCalled();
+  });
+
+  it('should return 201 and the success message on success', async () => {
+    await like(req, res);
+    expect(res.status).toHaveBeenCalledWith(201);
+    expect(res.json).toHaveBeenCalledWith({
+      success: true,
+      message: 'Like Added',
+    });
+  });
+
+  it('should return 500 and the error message on error', async () => {
+    const error = new Error('Test error');
+    Blog.findOne.mockRejectedValue(error);
+    await like(req, res);
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({
+      success: false,
+      message: `Server Error:Error when adding  a comment ${error.message}`,
+    })
+  })
+})
+
+
+
+
+describe('like', () => {
+  let req;
+  let res;
+  let blog;
+  
+  beforeEach(() => {
+  req = {
+  params: { id: '123' },
+  user: 'test user',
+  };
+  res = {
+  status: jest.fn().mockReturnThis(),
+  send: jest.fn().mockReturnThis(),
+  json: jest.fn().mockReturnThis(),
+  };
+  blog = {
+  likes: [],
+  save: jest.fn(),
+  };
+  Blog.findOne.mockResolvedValue(blog);
+  });
+  
+  it('should find the blog by its id', async () => {
+  await like(req, res);
+  expect(Blog.findOne).toHaveBeenCalledWith({ _id: req.params.id });
+  });
+  
+  it('should return 404 if the blog does not exist', async () => {
+  Blog.findOne.mockResolvedValue(null);
+  await like(req, res);
+  expect(res.status).toHaveBeenCalledWith(404);
+  expect(res.json).toHaveBeenCalledWith({
+  message: "Blog doesn't exist!",
+  });
+  });
+  
+  it('should save the blog', async () => {
+  await like(req, res);
+  expect(blog.save).toHaveBeenCalled();
+  });
+  
+  it('should return 201 and the success message on success', async () => {
+  await like(req, res);
+  expect(res.status).toHaveBeenCalledWith(201);
+  expect(res.json).toHaveBeenCalledWith({
+  success: true,
+  message: 'Like Added',
+  });
+  });
+  
+  it('should return 500 and the error message on error', async () => {
+  const error = new Error('Test error');
+  Blog.findOne.mockRejectedValue(error);
+  await like(req, res);
+  expect(res.status).toHaveBeenCalledWith(500);
+  expect(res.json).toHaveBeenCalledWith({
+  success: false,
+  message: `Server Error:Error when adding a like ${error.message}`
+  });
+  });
+  });

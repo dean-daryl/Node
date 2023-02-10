@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1676032098717" clover="3.2.0">
-  <project timestamp="1676032098717" name="All files">
-    <metrics statements="203" coveredstatements="97" conditionals="40" coveredconditionals="7" methods="28" coveredmethods="12" elements="271" coveredelements="116" complexity="0" loc="203" ncloc="203" packages="7" files="18" classes="18"/>
+<coverage generated="1676035740651" clover="3.2.0">
+  <project timestamp="1676035740651" name="All files">
+    <metrics statements="198" coveredstatements="103" conditionals="36" coveredconditionals="7" methods="28" coveredmethods="14" elements="262" coveredelements="124" complexity="0" loc="198" ncloc="198" packages="7" files="18" classes="18"/>
     <package name="Node">
       <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="index.js" path="C:\Users\deand\Documents\GitHub\Node\index.js">
@@ -40,9 +40,9 @@
       </file>
     </package>
     <package name="Node.controllers">
-      <metrics statements="119" coveredstatements="40" conditionals="24" coveredconditionals="4" methods="17" coveredmethods="5"/>
+      <metrics statements="114" coveredstatements="46" conditionals="20" coveredconditionals="4" methods="17" coveredmethods="7"/>
       <file name="blog.controller.js" path="C:\Users\deand\Documents\GitHub\Node\controllers\blog.controller.js">
-        <metrics statements="78" coveredstatements="32" conditionals="18" coveredconditionals="4" methods="11" coveredmethods="4"/>
+        <metrics statements="73" coveredstatements="38" conditionals="14" coveredconditionals="4" methods="11" coveredmethods="6"/>
         <line num="6" count="1" type="stmt"/>
         <line num="8" count="2" type="stmt"/>
         <line num="9" count="2" type="stmt"/>
@@ -84,43 +84,38 @@
         <line num="99" count="1" type="stmt"/>
         <line num="100" count="1" type="stmt"/>
         <line num="106" count="1" type="stmt"/>
-        <line num="108" count="0" type="stmt"/>
-        <line num="109" count="0" type="stmt"/>
-        <line num="117" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="118" count="0" type="stmt"/>
-        <line num="119" count="0" type="stmt"/>
-        <line num="121" count="0" type="stmt"/>
-        <line num="127" count="0" type="stmt"/>
-        <line num="134" count="1" type="stmt"/>
-        <line num="135" count="0" type="stmt"/>
+        <line num="108" count="2" type="stmt"/>
+        <line num="109" count="2" type="stmt"/>
+        <line num="117" count="0" type="stmt"/>
+        <line num="123" count="2" type="stmt"/>
+        <line num="131" count="1" type="stmt"/>
+        <line num="132" count="10" type="stmt"/>
+        <line num="134" count="10" type="stmt"/>
         <line num="137" count="0" type="stmt"/>
-        <line num="138" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="139" count="0" type="stmt"/>
-        <line num="146" count="0" type="stmt"/>
-        <line num="147" count="0" type="stmt"/>
-        <line num="149" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="138" count="0" type="stmt"/>
+        <line num="140" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="141" count="0" type="stmt"/>
+        <line num="142" count="0" type="stmt"/>
+        <line num="145" count="0" type="stmt"/>
         <line num="150" count="0" type="stmt"/>
         <line num="151" count="0" type="stmt"/>
-        <line num="154" count="0" type="stmt"/>
-        <line num="159" count="0" type="stmt"/>
-        <line num="160" count="0" type="stmt"/>
+        <line num="159" count="10" type="stmt"/>
+        <line num="167" count="1" type="stmt"/>
         <line num="168" count="0" type="stmt"/>
-        <line num="176" count="1" type="stmt"/>
-        <line num="177" count="0" type="stmt"/>
+        <line num="169" count="0" type="stmt"/>
+        <line num="171" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="172" count="0" type="stmt"/>
         <line num="178" count="0" type="stmt"/>
-        <line num="180" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="181" count="0" type="stmt"/>
-        <line num="187" count="0" type="stmt"/>
-        <line num="203" count="1" type="stmt"/>
-        <line num="204" count="6" type="stmt"/>
-        <line num="205" count="6" type="stmt"/>
-        <line num="207" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="208" count="1" type="stmt"/>
-        <line num="209" count="1" type="stmt"/>
-        <line num="212" count="4" type="stmt"/>
-        <line num="213" count="4" type="stmt"/>
-        <line num="214" count="4" type="stmt"/>
-        <line num="223" count="1" type="stmt"/>
+        <line num="194" count="1" type="stmt"/>
+        <line num="195" count="6" type="stmt"/>
+        <line num="196" count="6" type="stmt"/>
+        <line num="198" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="199" count="1" type="stmt"/>
+        <line num="200" count="1" type="stmt"/>
+        <line num="203" count="4" type="stmt"/>
+        <line num="204" count="4" type="stmt"/>
+        <line num="205" count="4" type="stmt"/>
+        <line num="214" count="1" type="stmt"/>
       </file>
       <file name="queries.controller.js" path="C:\Users\deand\Documents\GitHub\Node\controllers\queries.controller.js">
         <metrics statements="7" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>

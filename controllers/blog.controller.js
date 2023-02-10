@@ -114,17 +114,14 @@ export const getComments= async (req, res) => {
   model:'Blog',
   select: 'title'});
 
-  if(!blog){
-    res.status(404);
-    res.send({error:"Blog doesn't exist!"})
-  }
-  res.send(blog.comments);
+  res.status(200).send(blog.comments);
   
 
   }
 
   catch{
-      res.status(500).send({error:"Internal Server Error"})
+    res.status(404).json({message:"Blog doesn't exist!"});
+    
   }
   }
 
@@ -135,13 +132,7 @@ export const getComments= async (req, res) => {
     try {
       
       const blog = await Blog.findById(req.params.id);
-      if (!blog) {
-        return res.status(404).send({
-          statusCode: 404,
-          success: false,
-          data: [{ message: 'Blog not found!' }],
-        });
-      }
+     
       //check if the blog is already liked
       const alreadyLiked = blog.likes.find(
         (like) => like.user.toString() === req.user._id.toString(),
@@ -165,10 +156,10 @@ export const getComments= async (req, res) => {
       
     } 
     catch (error) {
-       res.status(500).json({
-      success:false,
-      message:`Server Error:Error when adding like ${error.message}`
-    })
+      return res.status(404).send({
+        statusCode: 404,
+        success: false,
+        data: [{ message: 'Blog not found!' }]})
     }
 
   }
