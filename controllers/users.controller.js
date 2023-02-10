@@ -1,9 +1,7 @@
 import User from "../models/Users.js";
 import bcrypt from 'bcrypt';
-// import passport from "passport";
-// const   LocalStrategy = passport.Strategy
 import jwt from 'jsonwebtoken'
-// import Users from "../models/Users.js";
+
 
 
  

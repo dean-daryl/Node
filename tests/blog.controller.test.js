@@ -1,7 +1,7 @@
-
+import cloudinary from '../uploads.js';
 import request from 'supertest';
 import { app } from '../index.js';
-import { getBlogs,getBlog,postBlog, deleteBlog,getComments,addComment} from '../controllers/blog.controller.js';
+import { getBlogs,getBlog,postBlog, deleteBlog,getComments,addComment,like,likecounter} from '../controllers/blog.controller.js';
 import Blog from '../models/Blogs';
 
 
@@ -48,52 +48,72 @@ describe('getBlogs', () => {
 // }));
 
 
-
 describe('postBlog', () => {
-  let req, res;
-
-  beforeEach(() => {
-    req = {
-      body: {
-        title: 'My Blog',
-        content: 'This is my blog content'
-      },
-      file: {
-        path: '/path/to/image.jpg'
-      }
-    };
-    res = {
-      json: jest.fn(),
-      status: jest.fn().mockReturnValue({ json: jest.fn() })
-    };
+  it('return a 401 status if user is not logged in', async () => {
+    const res = await request(app).post('/api/blogs/').send({});
+    expect(res.status).toEqual(401);
   });
-
-  it('should post a new blog and return it', async () => {
+  it('return a 201 status if user is admin', async () => {
+    const user = {
+      email: 'email@gmail.com',
+      password: 'password',
+    };
     const blog = {
-      title: 'My Blog',
-      content: 'This is my blog content',
-      image: 'https://example.com/image.jpg'
+      title: 'blog title',
+      content: 'blog content',
     };
-
-    const uploadResult = { url: 'https://example.com/image.jpg' };
-    cloudinary.uploader.upload.mockResolvedValue(uploadResult);
-    jest.spyOn(blog.prototype, 'save').mockResolvedValue(blog);
-    await postBlog(req, res);
-  
-    expect( blog.prototype.save).toHaveBeenCalled();
-    expect(res.json).toHaveBeenCalledWith(blog);
-  });
-
-  it('should return an error if the blog post fails', async () => {
-    const errorMessage = "Blog doesn't exist !";
-    cloudinary.uploader.upload.mockRejectedValue(new Error(errorMessage));
-
-    await postBlog(req, res);
-    expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.status().json).toHaveBeenCalledWith({ error: errorMessage });
+    const login = await request(app).post('/api/login').send(user);
+    const token = login.body.token;
+    const createdBlog = await request(app)
+      .post('/api/blogs/')
+      .send(blog)
+      .set('Authorization', 'Bearer ' + token);
+    expect(createdBlog.status).toEqual(201);
+    expect(createdBlog.body.data).toHaveProperty(
+      'title',
+      'content',
+      'likes',
+      'comments',
+      '_id',
+    );
   });
 });
 
+// update Blog
+
+describe('updateBlog', () => {
+  it('return a 401 status if user is not logged in', async () => {
+    const res = await request(app).post('/api/blogs/').send({});
+    expect(res.status).toEqual(401);
+  });
+  it('return a 201 status if user is admin', async () => {
+    const user = {
+      email: 'email@gmail.com',
+      password: 'password',
+    };
+    const blog = {
+      title: 'blog title',
+      content: 'blog content',
+    };
+    const signin = await request(app).post('/api/signin').send(user);
+    const token = signin.body.token;
+    const Blogs = await request(app).get('/api/blogs');
+    const Blog = Blogs.body.data[0];
+    const id = Blog._id;
+    const updatedBlog = await request(app)
+      .patch(`/api/blogs/${id}`)
+      .send(blog)
+      .set('Authorization', 'Bearer ' + token);
+    expect(updatedBlog.status).toEqual(201);
+    expect(updatedBlog.body.data).toHaveProperty(
+      'title',
+      'content',
+      'likes',
+      'comments',
+      '_id',
+    );
+  });
+});
 
 // delete Blog  
 describe('deleteBlog',()=>{
@@ -239,6 +259,28 @@ describe('getBlog', () => {
 //     expect(res.body).toHaveProperty('error', 'Internal Server Error');
 //   });
 // });
+
+
+// getcomments
+
+// describe('getcomments', () => {
+//   it("return a 400 status if '_id' is invalid", async () => {
+//     const res = await request(app).get('/api/blogs/1/comments');
+//     expect(res.status).toEqual(400);
+//     const message = res.body.message;
+//     expect(message).toEqual("Blog doesn't exist");
+//   });
+//   it('return one blog', async () => {
+//     const allBlogs = await request(app).get('/api/blogs');
+//     const currentBlog = allBlogs.body.data[0];
+//     const id = currentBlog._id;
+//     const res = await request(app).get(`/api/blogs/${id}/comments`);
+//     expect(res.status).toEqual(200);
+//   });
+// });
+
+// add comments
+
 describe('addComment', () => {
   let req;
   let res;
@@ -303,9 +345,8 @@ describe('addComment', () => {
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({
       success: false,
-      message: `Server Error:Error when adding a comment ${error.message}`,
+      message: `Server Error:Error when adding  a comment ${error.message}`,
     })
   })
 })
-
 

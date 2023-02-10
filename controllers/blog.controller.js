@@ -106,7 +106,6 @@ export const deleteBlog = async (req, res) =>{
 export const getComments= async (req, res) => {
 
   try{ 
-
   const blog = await Blog.findOne({ _id: req.params.id }).populate({
     path:'comments.user',
     model:'User',
@@ -125,7 +124,7 @@ export const getComments= async (req, res) => {
   }
 
   catch{
-      res.status(500).json({error:"Internal Server Error"})
+      res.status(500).send({error:"Internal Server Error"})
   }
   }
 
