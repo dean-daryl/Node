@@ -541,12 +541,12 @@ describe('LoggedIn', () => {
 
 
 describe('likecounter', () => {
-  // it("return a 401 status if '_id' is invalid", async () => {
-  //   const res = await request(app).get('/api/blogs/0001/likes');
-  //   expect(res.status).toEqual(404);
-  //   const message = res.body.message;
-  //   expect(message).toEqual("Blog doesn't exist");
-  // });
+  it("return a 401 status if '_id' is invalid", async () => {
+    const res = await request(app).get('/api/blogs/0001/likes');
+    expect(res.status).toEqual(401);
+    const message = res.body.message;
+    expect(message).toEqual("Blog doesn't exist");
+  });
   it('should return "Blog not found!" if blog is not found', async () => {
     const req = { params: { id: 'invalid_id' } };
     const res = {
