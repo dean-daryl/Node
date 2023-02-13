@@ -457,12 +457,12 @@ describe('myApi', () => {
   });
 
   describe('likecounter', () => {
-    // it("return a 401 status if '_id' is invalid", async () => {
-    //   const res = await request(app).get('/api/blogs/0001/likes');
-    //   expect(res.status).toEqual(401);
-    //   const message = res.body.message;
-    //   expect(message).toEqual("Blog doesn't exist");
-    // });
+    it("return a 401 status if '_id' is invalid", async () => {
+      const res = await request(app).get('/api/blogs/0001/likes');
+      expect(res.status).toEqual(401);
+      const message = res.body.message;
+      expect(message).toEqual("Blog doesn't exist");
+    });
     it('should return "Blog not found!" if blog is not found', async () => {
       const req = { params: { id: 'invalid_id' } };
       const res = {
@@ -487,25 +487,25 @@ describe('POST /query', () => {
     message: 'Test message',
   };
 
-  // it('should save a new query to the database and return it in the response', async () => {
+  it('should save a new query to the database and return it in the response', async () => {
 
-  //   const response = await request(app)
-  //     .post('/api/queries')
-  //     .send(mockQuery);
+    const response = await request(app)
+      .post('/api/queries')
+      .send(mockQuery);
 
-  //   expect(response.status).toBe(200);
+    expect(response.status).toBe(200);
 
-  //   expect(response.body).toMatchObject({
-  //     _id: expect.any(String),
-  //     name: mockQuery.name,
-  //     message: mockQuery.message,
-  //   });
+    expect(response.body).toMatchObject({
+      _id: expect.any(String),
+      name: mockQuery.name,
+      message: mockQuery.message,
+    });
 
-  //   const savedQuery = await Query.findById(response.body._id);
+    const savedQuery = await Query.findById(response.body._id);
 
-  //   expect(savedQuery).toBeDefined();
-  //   expect(savedQuery.toObject()).toMatchObject(mockQuery);
-  // });
+    expect(savedQuery).toBeDefined();
+    expect(savedQuery.toObject()).toMatchObject(mockQuery);
+  });
 });
 
 describe('GET /queries', () => {
@@ -539,27 +539,7 @@ describe('POST /signup', () => {
     password: 'password123',
   };
 
-  // it('should create a new user', async () => {
-  //   const response = await request(app)
-  //     .post('/api/signup')
-  //     .send(mockUser);
-  //     expect(response.status).toBe(200);
 
-  //   expect(response.body.message).toBe('New User successfully created');
-
-  //   // expect a new user to have been added to the database
-  //   const users = await User.find({});
-  //   expect(users).toHaveLength(1);
-  //   expect(users[0]).toMatchObject({
-  //     name: mockUser.name,
-  //     email: mockUser.email,
-  //     password: expect.any(String),
-  //   });
-
-  //   // expect the password to be hashed using bcrypt
-  //   const isPasswordValid = await bcrypt.compare(mockUser.password, users[0].password);
-  //   expect(isPasswordValid).toBe(true);
-  // });
 
   it('should return an error if the username is already taken', async () => {
     await new User({

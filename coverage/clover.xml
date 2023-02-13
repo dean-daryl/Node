@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1676295508019" clover="3.2.0">
-  <project timestamp="1676295508019" name="All files">
-    <metrics statements="206" coveredstatements="127" conditionals="40" coveredconditionals="15" methods="30" coveredmethods="18" elements="276" coveredelements="160" complexity="0" loc="206" ncloc="206" packages="8" files="19" classes="19"/>
+<coverage generated="1676296229538" clover="3.2.0">
+  <project timestamp="1676296229539" name="All files">
+    <metrics statements="206" coveredstatements="130" conditionals="40" coveredconditionals="15" methods="30" coveredmethods="19" elements="276" coveredelements="164" complexity="0" loc="206" ncloc="206" packages="8" files="19" classes="19"/>
     <package name="Node">
       <metrics statements="20" coveredstatements="16" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="1"/>
       <file name="index.js" path="C:\Users\deand\Documents\GitHub\Node\index.js">
@@ -46,7 +46,7 @@
       </file>
     </package>
     <package name="Node.controllers">
-      <metrics statements="112" coveredstatements="52" conditionals="20" coveredconditionals="5" methods="16" coveredmethods="8"/>
+      <metrics statements="112" coveredstatements="55" conditionals="20" coveredconditionals="5" methods="16" coveredmethods="9"/>
       <file name="blog.controller.js" path="C:\Users\deand\Documents\GitHub\Node\controllers\blog.controller.js">
         <metrics statements="74" coveredstatements="38" conditionals="14" coveredconditionals="4" methods="11" coveredmethods="6"/>
         <line num="6" count="1" type="stmt"/>
@@ -107,12 +107,12 @@
         <line num="151" count="0" type="stmt"/>
         <line num="159" count="2" type="stmt"/>
         <line num="168" count="1" type="stmt"/>
-        <line num="169" count="1" type="stmt"/>
-        <line num="170" count="1" type="stmt"/>
+        <line num="169" count="2" type="stmt"/>
+        <line num="170" count="2" type="stmt"/>
         <line num="172" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="173" count="0" type="stmt"/>
         <line num="179" count="0" type="stmt"/>
-        <line num="189" count="1" type="stmt"/>
+        <line num="189" count="2" type="stmt"/>
         <line num="198" count="1" type="stmt"/>
         <line num="199" count="6" type="stmt"/>
         <line num="200" count="6" type="stmt"/>
@@ -125,11 +125,11 @@
         <line num="218" count="1" type="stmt"/>
       </file>
       <file name="queries.controller.js" path="C:\Users\deand\Documents\GitHub\Node\controllers\queries.controller.js">
-        <metrics statements="7" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="3" count="1" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
