@@ -1,6 +1,7 @@
 import User from "../models/Users.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
+
 export const signup= async (req,res)=>{
      const password=req.body.password
      const name=req.body.name
@@ -9,7 +10,8 @@ try{
 
     const alreadyExits= await User.findOne({name:name})
     if(alreadyExits){
-        return res.status(404).json({message:"The Username is taken"})    
+       return res.status(404).send({message:"The Username is taken"})    
+     
     }
     const user = new User({
         name:req.body.name,
@@ -18,7 +20,7 @@ try{
     })
    
     await user.save();
-    res.status(500).json({message:"New User successfully created"})
+    res.status(200).json({message:"New User successfully created"})
 
  
 }
