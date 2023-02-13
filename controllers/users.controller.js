@@ -1,10 +1,6 @@
 import User from "../models/Users.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
-
-
-
- 
 export const signup= async (req,res)=>{
      const password=req.body.password
      const name=req.body.name
@@ -13,7 +9,7 @@ try{
 
     const alreadyExits= await User.findOne({name:name})
     if(alreadyExits){
-        return res.status(404).send({message:"The Username is taken"})    
+        return res.status(404).json({message:"The Username is taken"})    
     }
     const user = new User({
         name:req.body.name,
@@ -29,11 +25,8 @@ try{
 catch(error){
 console.log(error);
 res.status(400).json({message:error.message})
-
 }
-
 }
-
 export const signIn= async(req,res)=>{
     try{ 
      let email=req.body.email;
@@ -60,25 +53,22 @@ export const signIn= async(req,res)=>{
  const token=jwt.sign(payload,`${process.env.JWT_SECRET}`,options)
  res.status(200).json({ status: 200, success: true, token: token });
   }  
- }
-    catch (error) {
+    }
+ catch (error) {
+   
          console.log("message",error.message)
          return res.status(500).json({message:"Server Error "})
       }
     } 
-
-
-
 export const getUsers =  async(req,res)=>
 {
 const users=await User.find()
 res.send(users)
-
 }
 
-export const deleteUsers= async(req,res)=>{
-    const users= await User.deleteOne({_id:req.params.id})
-    res.json({message:"deleted user"})
+// export const deleteUsers= async(req,res)=>{
+//     const users= await User.deleteOne({_id:req.params.id})
+//     res.json({message:"deleted user"})
     
-    }
+//     }
 

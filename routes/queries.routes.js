@@ -6,8 +6,8 @@ import QuerySchema from '../validations/query.js';
 const queryrouter=express.Router()
 
 
-queryrouter.get("/queries",LoggedIn,isAdmin,getQueries)
+queryrouter.get("/queries",getQueries)
 
-queryrouter.post("/queries",LoggedIn,isValid(QuerySchema) , postQuery);
+queryrouter.post("/queries", postQuery);
 
 export default queryrouter;

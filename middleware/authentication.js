@@ -27,7 +27,7 @@ else{
 }
 catch(error){
     console.log(error)
-    res.status(500).send({message:"error"})
+   res.status(403).json({message:"Not Logged In"})
 }
 }
 
@@ -37,19 +37,15 @@ export const isAdmin = (req, res, next) => {
         
       if (req.user.isAdmin === true) {
         next();
-      } else {
+      }
+        
+      }
+     catch (error) {
+        console.log(error)
         res.status(403).json({
           status: 403,
           success: false,
           message: `Access denied`
         });
-      }
-    } catch (error) {
-        console.log(error)
-      res.status(500).json({
-        status: 500,
-        success: false,
-        message: `Error while checking admin ${error.message}`,
-      });
     }
   };

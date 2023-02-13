@@ -31,7 +31,7 @@ export const postBlog = async (req, res,next) => {
      
     } 
     catch (error) {
-      res.status(500).json({ error: "Blog doesn't exist !" });
+      res.status(401).json({ error: "Blog doesn't exist !" });
     }
   }
   // export default blogBlog;

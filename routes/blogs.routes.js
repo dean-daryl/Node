@@ -24,7 +24,7 @@ const uploads= multer({storage,fileFilter})
    blogrouter.get("/blogs", getBlogs)
    blogrouter.post("/blogs",LoggedIn,isAdmin, uploads.single('image'),isValid(BlogSchema), postBlog); 
    blogrouter.get("/blogs/:id",getBlog);
-   blogrouter.patch("/blogs/:id",LoggedIn,isAdmin,uploads.single('image'),updateBlog)
+   blogrouter.patch("/blogs/:id",LoggedIn,uploads.single('image'),updateBlog)
    blogrouter.delete("/blogs/:id",LoggedIn,isAdmin,deleteBlog);
    blogrouter.post("/blogs/:id/comments",LoggedIn,isValid(commentSchema),addComment)
    blogrouter.get("/blogs/:id/comments",LoggedIn,getComments)
