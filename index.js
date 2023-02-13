@@ -11,7 +11,7 @@ import * as config_file from './config/passport.js';
 import dotenv from 'dotenv'
 import swaggerDocs from './docs/swagger.js';
 dotenv.config()
-const PORT=process.env.PORT||3000
+export const PORT=process.env.PORT||3000
 export const app = express();
 app.use(json());
 app.use(

@@ -22,10 +22,11 @@ import { fileFilter } from '../routes/blogs.routes.js';
 import isValid from '../middleware/isBlogValid.js';
 import isUserValid from '../middleware/isUserValid.js';
 import { isAdmin, LoggedIn } from '../middleware/authentication.js';
+import { PORT } from '../index.js';
 import { getQueries, postQuery } from '../controllers/queries.controller.js';
 import { signIn, signup } from '../controllers/users.controller.js';
 import { response } from 'express';
-
+jest.setTimeout(200000);
 jest.mock('../models/Blogs.js', () => ({
   find: jest.fn().mockResolvedValue([
     { id: 1, title: 'Blog 1' },
@@ -58,7 +59,7 @@ describe('myApi', () => {
   beforeEach(async () => {
     mongoose.set('strictQuery', true);
     console.log(`${process.env.MONGO_URI_TEST}`);
-     mongoose
+    await mongoose
       .connect(`${process.env.MONGO_URI_TEST}`, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -93,18 +94,7 @@ describe('myApi', () => {
     });
   });
 
-  // Post Blog
-  // jest.mock('cloudinary', () => ({
-  //   uploader: {
-  //     upload: jest.fn()
-  //   }
 
-  // }));
-
-  // describe('postBlog', () => {
-  //   let token;
-
-  // });
 
   // delete Blog
   describe('deleteBlog', () => {
@@ -531,7 +521,7 @@ describe('GET /queries', () => {
   };
 
   beforeEach(async () => {
-     new Query(mockQuery).save();
+    await new Query(mockQuery).save();
   });
 
   it('should return a list of queries from the database', async () => {
