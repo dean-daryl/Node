@@ -58,7 +58,7 @@ describe('myApi', () => {
   beforeEach(async () => {
     mongoose.set('strictQuery', true);
     console.log(`${process.env.MONGO_URI_TEST}`);
-    await mongoose
+     mongoose
       .connect(`${process.env.MONGO_URI_TEST}`, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -101,50 +101,10 @@ describe('myApi', () => {
 
   // }));
 
-  describe('postBlog', () => {
-    let token;
+  // describe('postBlog', () => {
+  //   let token;
 
-    // beforeAll(async () => {
-    //   const response = await request(app)
-    //     .post('/api/signin')
-    //     .send(mockUser);
-
-    //   token = response.body.token;
-    // });
-    // afterEach(async () => {
-    //   await Blog.deleteMany({});
-    // });
-
-    // it('return a 401 status if user is not logged in', async () => {
-    //   const response = await request(app)
-    //   .post('/api/blogs')
-    //   .send({});
-
-    // expect(response.status).toBe(401);
-    // });
-    // it('should return 403 forbidden when user is not an admin', async () => {
-    //   const nonAdminUser = { ...mockUser, isAdmin: false };
-    //   const response = await request(app)
-    //     .post('/api/blogs')
-    //     .set('Authorization', `Bearer ${token}`)
-    //     .send(mockBlogData);
-    //   console.log(mockBlogData)
-    //   expect(response.status).toBe(403);
-    // });
-    // it('should create a new blog and return 201 created when blog data is valid and user is authorized', async () => {
-    //   const response = await request(app)
-    //     .post('/api/blogs')
-    //     .set('Authorization', `Bearer ${token}`)
-    //     .field('title', mockBlogData.title)
-    //     .field('content', mockBlogData.content)
-    //     .attach('image', 'test/fixtures/valid-image.jpg');
-
-    //   expect(response.status).toBe(201);
-    //   expect(response.body.title).toBe(mockBlogData.title);
-    //   expect(response.body.content).toBe(mockBlogData.content);
-
-    // });
-  });
+  // });
 
   // delete Blog
   describe('deleteBlog', () => {

@@ -9,6 +9,7 @@ import userrouter from './routes/users.routes.js';
 import passport from 'passport';
 import * as config_file from './config/passport.js';
 import dotenv from 'dotenv'
+import swaggerDocs from './docs/swagger.js';
 dotenv.config()
 const PORT=process.env.PORT||3000
 export const app = express();
@@ -43,4 +44,5 @@ if (process.env.NODE_ENV !== 'test') {
 }
 app.listen(PORT, () => {
   console.log('Server is On');
+  swaggerDocs(app,PORT)
 });

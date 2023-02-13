@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test":"jest --coverage --forceExit" ,
+    "test": "jest --coverage --forceExit",
     "start": "nodemon index.js"
   },
   "jest": {
@@ -31,7 +31,9 @@
     "passport-local": "^1.0.0",
     "save-dev": "0.0.1-security",
     "sharp": "^0.31.3",
-    "supertest": "^6.3.3"
+    "supertest": "^6.3.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",
