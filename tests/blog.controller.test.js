@@ -632,21 +632,21 @@ describe('GET /queries', () => {
     message: 'Test message',
   };
 
-  // beforeEach(async () => {
-  //   await new Query(mockQuery).save();
-  // });
+  beforeEach(async () => {
+    await new Query(mockQuery).save();
+  });
 
-  // it('should return a list of queries from the database', async () => {
-  //   const response = await request(app).get('/api/queries');
+  it('should return a list of queries from the database', async () => {
+    const response = await request(app).get('/api/queries');
 
-  //   expect(response.status).toBe(200);
-  //   expect(Array.isArray(response.body)).toBe(true);
-  //   expect(response.body[0]).toMatchObject({
-  //     _id: expect.any(String),
-  //     name: mockQuery.name,
-  //     message: mockQuery.message,
-  //   });
-  // });
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.body)).toBe(true);
+    expect(response.body[0]).toMatchObject({
+      _id: expect.any(String),
+      name: mockQuery.name,
+      message: mockQuery.message,
+    });
+  });
 
 });
 
@@ -686,19 +686,19 @@ describe('POST /signup', () => {
   //   expect(isPasswordValid).toBe(true);
   // });
 
-  // it('should return an error if the username is already taken', async () => {
-  //   // add a mock user to the database with the same name as the mockUser
-  //   await new User({ name: mockUser.name, email: 'anotheruser@example.com', password: 'password123' }).save();
+  it('should return an error if the username is already taken', async () => {
+    // add a mock user to the database with the same name as the mockUser
+    await new User({ name: mockUser.name, email: 'anotheruser@example.com', password: 'password123' }).save();
 
-  //   // use supertest to send a POST request to the /signup endpoint with the mock user data
-  //   const response = await request(app)
-  //     .post('/api/signup')
-  //     .send(mockUser);
+    // use supertest to send a POST request to the /signup endpoint with the mock user data
+    const response = await request(app)
+      .post('/api/signup')
+      .send(mockUser);
 
-  //   expect(response.status).toBe(404);
-  //   expect(response.body.message).toBe('The Username is taken');
-  //   const users = await User.find({});
-  // });
+    expect(response.status).toBe(404);
+    expect(response.body.message).toBe('The Username is taken');
+    const users = await User.find({});
+  });
 
   // add more test cases as needed
 });
