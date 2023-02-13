@@ -531,7 +531,7 @@ describe('GET /queries', () => {
   };
 
   beforeEach(async () => {
-    await new Query(mockQuery).save();
+     new Query(mockQuery).save();
   });
 
   it('should return a list of queries from the database', async () => {
