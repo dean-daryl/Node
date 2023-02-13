@@ -23,9 +23,6 @@ import isValid from '../middleware/isBlogValid.js';
 import isUserValid from '../middleware/isUserValid.js';
 import { isAdmin, LoggedIn } from '../middleware/authentication.js';
 import { PORT } from '../index.js';
-import { getQueries, postQuery } from '../controllers/queries.controller.js';
-import { signIn, signup } from '../controllers/users.controller.js';
-import { response } from 'express';
 
 jest.mock('../models/Blogs.js', () => ({
   find: jest.fn().mockResolvedValue([
@@ -46,19 +43,19 @@ const mockBlogData = {
   image: 'https://example.com/image.jpg',
 };
 
-let server;
-beforeAll(() => {
-  server = app.listen(3000);
-});
+// let server;
+// beforeAll(() => {
+//   server = app.listen(PORT);
+// });
 
-afterAll((done) => {
-  server.close(done);
-});
+// afterAll((done) => {
+//   server.close(done);
+// });
 
 describe('myApi', () => {
-  beforeEach(async () => {
+  beforeAll(async () => {
     mongoose.set('strictQuery', true);
-    console.log(`${process.env.MONGO_URI_TEST}`);
+
     await mongoose
       .connect(`${process.env.MONGO_URI_TEST}`, {
         useNewUrlParser: true,
@@ -93,8 +90,6 @@ describe('myApi', () => {
       ]);
     });
   });
-
-
 
   // delete Blog
   describe('deleteBlog', () => {
@@ -457,7 +452,6 @@ describe('myApi', () => {
 
     it('should return 404 if the user does not exist', async () => {
       const response = await request(app).post('/signin').send(mockBlogData);
-      console.log(mockBlogData);
       expect(response.status).toBe(404);
     });
   });

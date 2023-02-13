@@ -8,10 +8,10 @@ import userrouter from './routes/users.routes.js';
 
 import passport from 'passport';
 import * as config_file from './config/passport.js';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 import swaggerDocs from './docs/swagger.js';
-dotenv.config()
-export const PORT=process.env.PORT||3000
+dotenv.config();
+export const PORT = process.env.PORT || 3000;
 export const app = express();
 app.use(json());
 app.use(
@@ -42,7 +42,8 @@ if (process.env.NODE_ENV !== 'test') {
       console.log(error);
     });
 }
+
 app.listen(PORT, () => {
   console.log('Server is On');
-  swaggerDocs(app,PORT)
+  swaggerDocs(app, PORT);
 });
