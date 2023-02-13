@@ -26,7 +26,7 @@ import { PORT } from '../index.js';
 import { getQueries, postQuery } from '../controllers/queries.controller.js';
 import { signIn, signup } from '../controllers/users.controller.js';
 import { response } from 'express';
-jest.setTimeout(200000);
+
 jest.mock('../models/Blogs.js', () => ({
   find: jest.fn().mockResolvedValue([
     { id: 1, title: 'Blog 1' },
