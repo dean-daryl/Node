@@ -1,6 +1,11 @@
 import User from "../models/Users.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
+    
+export const getUsers = async (req, res) => {
+  const users = await User.find();
+  res.send(users);
+};
 
 export const signup= async (req,res)=>{
      const password=req.body.password
@@ -31,6 +36,8 @@ console.log(error);
 res.status(400).json({message:error.message})
 }
 }
+
+
 export const signIn= async(req,res)=>{
     try{ 
      let email=req.body.email;
@@ -64,15 +71,7 @@ export const signIn= async(req,res)=>{
          return res.status(500).json({message:"Server Error "})
       }
     } 
-export const getUsers =  async(req,res)=>
-{
-const users=await User.find()
-res.send(users)
-}
-
-// export const deleteUsers= async(req,res)=>{
-//     const users= await User.deleteOne({_id:req.params.id})
-//     res.json({message:"deleted user"})
     
-//     }
+
+
 

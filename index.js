@@ -1,11 +1,9 @@
 import express, { json } from 'express';
 import session from 'express-session';
-import { connect } from 'mongoose';
 import mongoose from 'mongoose';
 import blogrouter from './routes/blogs.routes.js';
 import queryrouter from './routes/queries.routes.js';
 import userrouter from './routes/users.routes.js';
-
 import passport from 'passport';
 import * as config_file from './config/passport.js';
 import dotenv from 'dotenv';

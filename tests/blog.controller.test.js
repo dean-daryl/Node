@@ -34,14 +34,22 @@ jest.mock('../models/Blogs.js', () => ({
 }));
 const mockUser = {
   username: 'testuser',
+  email: 'testuser@gmail.com',
   password: 'testpassword',
   isAdmin: true,
 };
+const mockCredentials = {
+  email: 'anotheruser@example.com',
+  password: 'password123',
+};
 const mockBlogData = {
+  _id: 1,
   title: 'Test Blog',
   content: 'Lorem ipsum dolor sit amet',
   image: 'https://example.com/image.jpg',
 };
+let _TOKEN = '';
+let blog_id = '';
 
 // let server;
 // beforeAll(() => {
@@ -88,6 +96,22 @@ describe('myApi', () => {
         { id: 1, title: 'Blog 1' },
         { id: 2, title: 'Blog 2' },
       ]);
+    });
+  });
+  // update Blog
+
+  describe('PATCH /api/blogs/:id', () => {
+    it('Should return 403 if user is not Logged In', async () => {
+      const login = await request(app)
+        .post('/api/signin')
+        .send(mockCredentials);
+      const token = login.body.token;
+      const res = await request(app)
+        .patch(`/api/blogs/63ea3019aabcc296361ed478`)
+        .send(mockBlogData)
+        .set('Authorization', 'Bearer ' + token);
+
+      expect(res.statusCode).toEqual(403);
     });
   });
 
@@ -488,10 +512,7 @@ describe('POST /query', () => {
   };
 
   it('should save a new query to the database and return it in the response', async () => {
-
-    const response = await request(app)
-      .post('/api/queries')
-      .send(mockQuery);
+    const response = await request(app).post('/api/queries').send(mockQuery);
 
     expect(response.status).toBe(200);
 
@@ -538,8 +559,6 @@ describe('POST /signup', () => {
     email: 'testuser@example.com',
     password: 'password123',
   };
-
-
 
   it('should return an error if the username is already taken', async () => {
     await new User({

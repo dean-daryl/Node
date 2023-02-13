@@ -20,9 +20,7 @@ else{
 }
 
 }
-else{
-  res.status(401).json({message:"Not Logged In"})
-}
+
 
 }
 catch(error){
