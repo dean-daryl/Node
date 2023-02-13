@@ -13,6 +13,7 @@ try{
        return res.status(404).send({message:"The Username is taken"})    
      
     }
+else{
     const user = new User({
         name:req.body.name,
         email:req.body.email,
@@ -23,6 +24,7 @@ try{
     res.status(200).json({message:"New User successfully created"})
 
  
+}
 }
 catch(error){
 console.log(error);
