@@ -1,0 +1,1 @@
+[![Coverage Status](https://coveralls.io/repos/github/dean-daryl/Node/badge.png?branch=samplebranch101)](https://coveralls.io/github/dean-daryl/Node?branch=samplebranch101)
