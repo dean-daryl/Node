@@ -28,39 +28,43 @@
 /*
  create a blog
 */
-
-/** 
+/**
  * @openapi
  * '/api/blogs':
  *  post:
  *     tags:
  *     - Blog
- *     summary: Create a Blog
+ *     summary: Create a blog
  *     requestBody:
  *      required: true
  *      content:
- *        application/json:
+ *        multipart/form-data:
  *           schema:
  *            type: object
  *            required:
  *              - title
  *              - content
+ *              - image
  *            properties:
  *              title:
  *                type: string
  *                default: title
  *              content:
  *                type: string
- *                default: content
+ *                default: Content of the blog
+ *              image:
+ *                type: string
+ *                format: binary
  *     responses:
- *      200:
- *        description: Blog Created
- *      400:
- *        description: Bad Request
+ *      201:
+ *        description: Created
+ *      409:
+ *        description: Conflict
  *      404:
  *        description: Not Found
  */
 
+/*
 // Get one Blog
 /** 
  * @openapi
@@ -98,7 +102,7 @@
 /*
 Update a blog
 */
-/** 
+/**
  * @openapi
  * '/api/blogs/{id}':
  *  patch:
@@ -113,12 +117,13 @@ Update a blog
  *     requestBody:
  *      required: true
  *      content:
- *        application/json:
+ *        multipart/form-data:
  *           schema:
  *            type: object
  *            required:
  *              - title
  *              - content
+ *              - image
  *            properties:
  *              title:
  *                type: string
@@ -126,6 +131,9 @@ Update a blog
  *              content:
  *                type: string
  *                default: content
+ *              image:
+ *                type: string
+ *                format: binary
  *     responses:
  *      200:
  *        description: Updated
@@ -135,9 +143,9 @@ Update a blog
  *        description: Not Found
  */
 
-/*
- delete a blog
-*/
+
+
+
 /**
  * @openapi
  * '/api/blogs/{id}':

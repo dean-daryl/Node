@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "jest --coverage --forceExit",
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "jest": {
     "transform": {
