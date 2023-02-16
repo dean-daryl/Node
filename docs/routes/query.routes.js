@@ -44,6 +44,7 @@
  * '/api/queries':
  *  get:
  *     security:
+ *      - jwt: []
  *      - bearerAuth: []
  *     tags:
  *     - Queries

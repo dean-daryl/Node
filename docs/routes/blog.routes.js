@@ -33,6 +33,7 @@
  * '/api/blogs':
  *  post:    
  *     security:
+ *      - jwt: []
  *      - bearerAuth: []
  *     tags:
  *      - Blog
@@ -107,6 +108,7 @@ Update a blog
  * '/api/blogs/{id}':
  *  patch:
  *     security:
+ *      - jwt: []
  *      - bearerAuth: []
  *     tags:
  *     - Blog
@@ -153,6 +155,7 @@ Update a blog
  * '/api/blogs/{id}':
  *  delete:
  *     security:
+ *      - jwt: []
  *      - bearerAuth: []
  *     tags:
  *     - Blog
@@ -181,6 +184,7 @@ comment on a blog
  * '/api/blogs/{id}/comments':
  *  post:
  *     security:
+ *      - jwt: []
  *      - bearerAuth: []
  *     tags:
  *      - Blog
@@ -256,6 +260,7 @@ Like
  * '/api/blogs/{id}/likes':
  *  post:
  *     security:
+ *      - jwt: []
  *      - bearerAuth: []
  *     tags:
  *      - Blog
