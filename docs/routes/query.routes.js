@@ -43,6 +43,8 @@
  * @openapi
  * '/api/queries':
  *  get:
+ *     security:
+ *      - bearerAuth: []
  *     tags:
  *     - Queries
  *     summary: Get all Queries

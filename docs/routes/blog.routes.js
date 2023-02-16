@@ -31,9 +31,11 @@
 /**
  * @openapi
  * '/api/blogs':
- *  post:
+ *  post:    
+ *     security:
+ *      - bearerAuth: []
  *     tags:
- *     - Blog
+ *      - Blog
  *     summary: Create a blog
  *     requestBody:
  *      required: true
@@ -64,9 +66,7 @@
  *        description: Not Found
  */
 
-/*
-// Get one Blog
-/** 
+/**
  * @openapi
  * '/api/blogs/{id}':
  *  get:
@@ -106,6 +106,8 @@ Update a blog
  * @openapi
  * '/api/blogs/{id}':
  *  patch:
+ *     security:
+ *      - bearerAuth: []
  *     tags:
  *     - Blog
  *     summary: Update a blog
@@ -150,6 +152,8 @@ Update a blog
  * @openapi
  * '/api/blogs/{id}':
  *  delete:
+ *     security:
+ *      - bearerAuth: []
  *     tags:
  *     - Blog
  *     summary: Remove blog by id
@@ -176,8 +180,10 @@ comment on a blog
  * @openapi
  * '/api/blogs/{id}/comments':
  *  post:
+ *     security:
+ *      - bearerAuth: []
  *     tags:
- *     - Blog
+ *      - Blog
  *     summary: Add comment
  *     parameters:
  *      - name: id
@@ -249,8 +255,10 @@ Like
  * @openapi
  * '/api/blogs/{id}/likes':
  *  post:
+ *     security:
+ *      - bearerAuth: []
  *     tags:
- *     - Blog
+ *      - Blog
  *     summary: Add or remove a like on a blog
  *     parameters:
  *      - name: id
