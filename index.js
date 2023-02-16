@@ -11,6 +11,10 @@ import swaggerDocs from './docs/swagger.js';
 dotenv.config();
 export const PORT = process.env.PORT || 3000;
 export const app = express();
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 app.use(json());
 app.use(
   session({
