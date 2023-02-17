@@ -508,6 +508,7 @@ describe('POST /query', () => {
   // define a mock query object for testing
   const mockQuery = {
     name: 'John Doe',
+    email:'johndoe@email.com',
     message: 'Test message',
   };
 
@@ -532,8 +533,10 @@ describe('POST /query', () => {
 describe('GET /queries', () => {
   const mockQuery = {
     name: 'John Doe',
+    email: 'johndoe@email.com',
     message: 'Test message',
   };
+
 
   beforeEach(async () => {
     await new Query(mockQuery).save();
@@ -547,6 +550,7 @@ describe('GET /queries', () => {
     expect(response.body[0]).toMatchObject({
       _id: expect.any(String),
       name: mockQuery.name,
+      email:mockQuery.email,
       message: mockQuery.message,
     });
   });
