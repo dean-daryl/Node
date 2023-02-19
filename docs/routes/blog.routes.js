@@ -173,9 +173,6 @@ Update a blog
  *      404:
  *        description: Not Found
  */
-/* 
-*/
-
 /*
 comment on a blog
 */

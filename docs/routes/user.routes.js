@@ -69,20 +69,18 @@
  *        description: Not Found
  */
 
-
-// /**
-//  * @openapi
-//  * '/api/signup:
-//  *  get:
-//  *     tags:
-//  *     - Users
-//  *     summary: Get all users
-//  *     responses:
-//  *      201:
-//  *        description: Created
-//  *      409:
-//  *        description: Conflict
-//  *      404:
-//  *        description: Not Found
-//  */
-
+/**
+ * @openapi
+ * '/api/signup':
+ *  get:
+ *     tags:
+ *     - Users
+ *     summary: Get all users
+ *     responses:
+ *      201:
+ *        description: Created
+ *      409:
+ *        description: Conflict
+ *      404:
+ *        description: Not Found
+ */
