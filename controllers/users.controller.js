@@ -54,7 +54,7 @@ export const signIn= async(req,res)=>{
  const payload={
      id:user.id,
      username:user.name,
-     isAdmin:user.is,
+     isAdmin:user.isAdmin,
      email:user.email
  };
  
