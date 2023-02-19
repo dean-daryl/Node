@@ -6,6 +6,8 @@ export const getBlogs = async (req, res) => {
   res.send(blogs);
 };
 
+
+
 export const postBlog = async (req, res, next) => {
   try {
     const blog = new Blog({

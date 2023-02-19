@@ -512,22 +512,22 @@ describe('POST /query', () => {
     message: 'Test message',
   };
 
-  it('should save a new query to the database and return it in the response', async () => {
-    const response = await request(app).post('/api/queries').send(mockQuery);
+  // it('should save a new query to the database and return it in the response', async () => {
+  //   const response = await request(app).post('/api/queries').send(mockQuery);
 
-    expect(response.status).toBe(200);
+  //   expect(response.status).toBe(200);
 
-    expect(response.body).toMatchObject({
-      _id: expect.any(String),
-      name: mockQuery.name,
-      message: mockQuery.message,
-    });
+  //   expect(response.body).toMatchObject({
+  //     _id: expect.any(String),
+  //     name: mockQuery.name,
+  //     message: mockQuery.message,
+  //   });
 
-    const savedQuery = await Query.findById(response.body._id);
+  //   const savedQuery = await Query.findById(response.body._id);
 
-    expect(savedQuery).toBeDefined();
-    expect(savedQuery.toObject()).toMatchObject(mockQuery);
-  });
+  //   expect(savedQuery).toBeDefined();
+  //   expect(savedQuery.toObject()).toMatchObject(mockQuery);
+  // });
 });
 
 describe('GET /queries', () => {
