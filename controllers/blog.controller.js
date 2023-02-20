@@ -156,13 +156,8 @@ export const addComment = async (req, res) => {
       res.send({ error: "Blog doesn't exist!" });
     } else {
       blog.comments = [
-        blog.comments,
-        {
-          name: req.body.name,
-          comment: req.body.comment,
-          user: req.user,
-          blog: blog,
-        },
+        ...blog.comments,
+        { comment: req.body.comment, user: req.user, blog: blog },
       ];
       blog.save();
       res.status(201).json({
