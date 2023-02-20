@@ -12,6 +12,7 @@ export const postBlog = async (req, res, next) => {
   try {
     const blog = new Blog({
       title: req.body.title,
+      summary:req.body.summary,
       content: req.body.content,
     });
 
@@ -49,6 +50,9 @@ export const updateBlog = async (req, res) => {
   }
   if (req.body.content) {
     blog.content = req.body.content;
+  }
+  if (req.body.summary) {
+    blog.summary = req.body.content;
   }
   if (req.file) {
     blog.image = req.file.path;

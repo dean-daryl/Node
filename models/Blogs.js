@@ -6,6 +6,7 @@ const schema = mongoose.Schema({
 	
 	title: String,
 	content: String,
+	summary:String,
 	comments:[commentSchema],
 	likes:[likeSchema],
 	image:String
