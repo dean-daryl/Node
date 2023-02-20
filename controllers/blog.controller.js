@@ -157,7 +157,7 @@ export const addComment = async (req, res) => {
     } else {
       blog.comments = [
         ...blog.comments,
-        { comment: req.body.comment, user: req.user, blog: blog },
+        { comment: req.body.comment, name:req.body.name,user: req.user, blog: blog },
       ];
       blog.save();
       res.status(201).json({
