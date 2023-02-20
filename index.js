@@ -9,14 +9,15 @@ import * as config_file from './config/passport.js';
 import dotenv from 'dotenv';
 import swaggerDocs from './docs/swagger.js';
 dotenv.config();
+import cors from 'cors'
 export const PORT = process.env.PORT || 3000;
 export const app = express();
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'content-type ,Authorization');
-
   next();
 });
+app.use(cors())
 app.use(json());
 app.use(
   session({
