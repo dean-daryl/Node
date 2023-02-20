@@ -6,13 +6,11 @@ export const getBlogs = async (req, res) => {
   res.send(blogs);
 };
 
-
-
 export const postBlog = async (req, res, next) => {
   try {
     const blog = new Blog({
       title: req.body.title,
-      summary:req.body.summary,
+      summary: req.body.summary,
       content: req.body.content,
     });
 
@@ -158,8 +156,13 @@ export const addComment = async (req, res) => {
       res.send({ error: "Blog doesn't exist!" });
     } else {
       blog.comments = [
-        ...blog.comments,
-        { comment: req.body.comment, user: req.user, blog: blog },
+        blog.comments,
+        {
+          name: req.body.name,
+          comment: req.body.comment,
+          user: req.user,
+          blog: blog,
+        },
       ];
       blog.save();
       res.status(201).json({
