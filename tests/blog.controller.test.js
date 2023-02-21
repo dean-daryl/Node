@@ -436,7 +436,7 @@ describe('myApi', () => {
       expect(res.status).toHaveBeenCalledWith(500);
       expect(res.json).toHaveBeenCalledWith({
         success: false,
-        message: 'Server Error:Error when adding  a comment Test error',
+        message: 'Server Error:Error when adding  a Like Test error',
       });
     });
   });

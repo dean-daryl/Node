@@ -119,7 +119,7 @@ export const like = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: 'Server Error:Error when adding  a comment Test error',
+      message: 'Server Error:Error when adding  a Like Test error',
     });
   }
 };

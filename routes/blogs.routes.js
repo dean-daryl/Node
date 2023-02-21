@@ -28,6 +28,6 @@ const uploads= multer({storage,fileFilter})
    blogrouter.delete("/blogs/:id",LoggedIn,isAdmin,deleteBlog);
    blogrouter.post("/blogs/:id/comments",isValid(commentSchema),addComment)
    blogrouter.get("/blogs/:id/comments",getComments)
-   blogrouter.post("/blogs/:id/likes",like)
+   blogrouter.post("/blogs/:id/likes",LoggedIn,like)
    blogrouter.get("/blogs/:id/likes",likecounter)
     export default  blogrouter;
