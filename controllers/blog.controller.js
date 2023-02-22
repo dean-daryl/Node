@@ -50,7 +50,7 @@ export const updateBlog = async (req, res) => {
     blog.content = req.body.content;
   }
   if (req.body.summary) {
-    blog.summary = req.body.content;
+    blog.summary = req.body.summary;
   }
   if (req.file) {
     blog.image = req.file.path;
